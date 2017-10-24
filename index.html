@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <link rel="stylesheet" href="css/bootcustom.css">
+        <link rel="stylesheet" href="css/style.css">
+        <meta charset="utf-8">
+        <title></title>
+    </head>
+    <body>
+        <div class="container">
+
+            <h2 class="b-buffer-1"><span class="hul">ABV Calculator</span> 🍻</h2>
+
+            <!-- Calculator input -->
+            <!-- OG -->
+            <div class="row bottom-buffer">
+                <div class="col-lg-2 col-md-3 col-sm-4 text-nowrap">
+                    <strong>Original Gravity:</strong>
+                </div>
+                <div class="col-lg-2 col-sm-2">
+                    <input id="og" class="form-control small-input" type="decimal" value="1.040" onchange="update_abv()"></input>
+                </div>
+            </div>
+            <!-- FG -->
+            <div class="row bottom-buffer">
+                <div class="col-lg-2 col-md-3 col-sm-4 text-nowrap">
+                    <strong>Final Gravity:</strong>
+                </div>
+                <div class="col">
+                    <input id="fg" class="form-control small-input" type="decimal" value="1.010" onchange="update_abv()"></input>
+                </div>
+            </div>
+            <!-- ABV -->
+            <div class="row">
+                <div class="col-lg-2 col-md-3 col-sm-4 text-nowrap">
+                    <strong>ABV:</strong>
+                </div>
+                <div class="col">
+                    <strong><span id="abv" class="text-primary"></span></strong>
+                </div>
+            </div>
+
+            <!-- Description -->
+            <p>
+                This calculator uses SG measurement for gravity and calculates
+                ABV based on the simplified formula (OG &minus; FG) &times; 131.25 = ABV percentage
+            </p>
+
+        </div>
+
+        <!-- Calculator script -->
+        <script>
+            //calculate the ABV from SG measurement
+            function get_abv(){
+                var og = document.getElementById("og").value;
+                var fg = document.getElementById("fg").value;
+                console.log("original gravity = " + og);
+                console.log("final gravity = " + fg);
+                var abv = (og - fg) * 131.25;
+                return abv;
+            }
+
+            function update_abv(){
+                var percentage = Math.round(get_abv()*100)/100;
+                document.getElementById("abv").innerHTML = percentage;
+            }
+
+            update_abv();
+        </script>
+    </body>
+</html>
